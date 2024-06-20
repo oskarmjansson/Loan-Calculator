@@ -1,0 +1,112 @@
+@model LoanCalculator.Models.Loan
+
+@{
+    ViewData["Title"] = "LoanCalculation";
+}
+    @* <Sumary>
+    This is the view for the loan calculation. It contains a form where the user can enter the type of loan, total amount, payback time, and interest rate. 
+    The form is submitted using AJAX and the data is sent to the LoanCalculation action in the LoanController. 
+    If the form submission is successful, the user is alerted with a success message. 
+    If there are any validation errors, the user is alerted with an appropriate error message. 
+    If the loan type already exists in the database, the user is alerted with a message indicating that a loan with the same type already exists. 
+    The user can also navigate to the homepage or view all loans using the buttons provided.
+
+    AJAX are used to prevent the form from being submitted in the traditional way and to handle the response from the server. 
+    This is meaningful because it allows the user to stay on the same page and receive feedback without having to reload the page.
+
+    JavaScript are better than c# here because it allows for a more interactive and responsive user experience. 
+    It also allows for more control over the form submission process and handling of errors.
+        
+        
+    </summary> *@
+<h1>Calculator for loans</h1>
+
+<h4>Enter the following data needed: </h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="loanForm" asp-action="LoanCalculation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="loanType" class="control-label">Type of loan</label>
+                <input asp-for="loanType" class="form-control" />
+                <span asp-validation-for="loanType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="amount" class="control-label">Total amount</label>
+                <input asp-for="amount" class="form-control" />
+                <span asp-validation-for="amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="payBackTime" class="control-label">Payback Time(years)</label>
+                <input asp-for="payBackTime" class="form-control" min="1" />
+                <span asp-validation-for="payBackTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="interest" class="control-label">Interest rate</label>
+                <input asp-for="interest" class="form-control" min="0" />
+                <span asp-validation-for="interest" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send information to database" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="margin-top: 10px;">
+
+    <a href="@Url.Action("Index")" class="btn btn-primary">Go to homepage</a>
+</div>
+<div style="margin-top: 10px;">
+    <a href="@Url.Action("DisplayLoans")" class="btn btn-primary" b-1ejoa07p39>View all loans</a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#loanForm').on('submit', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'post',
+                data: $(this).serialize(),
+                success: function (response) {
+
+                    if (response === "A loan with the same type already exists.") {
+                        alert("A loan with the same type already exists.");
+                    } else {
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (jqXHR.status === 400) {
+                        if (jqXHR.responseText === "Interest must be greater than zero.") {
+                            alert("Interest must be greater than zero.");
+                        }
+                        if (jqXHR.responseText === "Payback time must be greater than zero.") {
+                            alert("Please enter a payback time greater than zero.");
+                        }
+                        if (jqXHR.responseText === "Amount and payback time must be greater than zero. Interest must be greater than or equal to zero.") {
+                            alert("Amount and payback time must be greater than zero. Interest must be greater than or equal to zero.");
+                        }
+                        else if (jqXHR.responseText === "A loan with the same type already exists.") {
+                            alert("A loan with the same type already exists.");
+                        }
+                        else {
+                            alert(jqXHR.responseText);
+                        }
+                    } else {
+                        var error = JSON.parse(jqXHR.responseText);
+                        alert(error.responseText);
+                        alert(error.message);
+                    }
+                }
+                complete: function (jqXHR, textStatus) {
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,29 @@
+@model List<double>
+
+    @* <Sumary>
+    This is the view for the payment plan. It shows a table with the payment plan for a loan.  
+    The payment plan is calculated in the LoanController and passed to this view as a list of doubles.    
+    </summary> *@
+
+<h1>Payment Plan</h1>
+<a href="@Url.Action("DisplayLoans")" class="btn btn-primary" b-1ejoa07p39>View all loans</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Payment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model[i]</td>
+            </tr>
+
+        }
+    </tbody>
+</table>

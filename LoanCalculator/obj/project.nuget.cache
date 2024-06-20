@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "gVl74n52ZsjDyfjarIPIlpwcYGDTxcONRmA6+PQOGmkAUak3C2i9vbxdLHZwSbH7+KHjFP6K9Zc0TMlJKHZm9Q==",
+  "success": true,
+  "projectFilePath": "/Users/oskarjansson/Desktop/LoanCalculator/LoanCalculator.csproj",
+  "expectedPackageFiles": [
+    "/Users/oskarjansson/.nuget/packages/microsoft.data.sqlite/8.0.6/microsoft.data.sqlite.8.0.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/microsoft.data.sqlite.core/8.0.6/microsoft.data.sqlite.core.8.0.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.6/sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/sqlitepclraw.core/2.1.6/sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.6/sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.6/sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512",
+    "/Users/oskarjansson/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}

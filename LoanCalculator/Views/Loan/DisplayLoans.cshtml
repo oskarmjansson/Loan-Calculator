@@ -1,0 +1,96 @@
+@model IEnumerable<LoanCalculator.Models.Loan>
+@{
+    ViewData["Title"] = "DisplayLoans";
+}
+
+@* <Sumary>
+This is the view for displaying all loans. It shows a table with all loans that have been calculated. 
+The user can view the loan type, amount, payback time, and interest rate for each loan.
+The user can also edit a loan or view the payment plan for a loan. 
+For now there is only one payback scheme implemented, but it could easily be implemented because of the dropdown menu.
+The dropdown menu includes the needed identifier for the loan. Only needed is a new view and a new action in the controller
+with the needed logic for the new payback scheme.
+</summary> *@
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 160px;
+        z-index: 1;
+        left: 100%;
+        margin-top: -50px;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+<div style="text-align: center;">
+    <a href="@Url.Action("Index")" class="btn btn-primary" b-1ejoa07p39>Go to homepage</a>
+    <a href="@Url.Action("LoanCalculation")" class="btn btn-primary" b-1ejoa07p39>Make new loan calculation</a>
+</div>
+
+<h1>All loans</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Loan Type
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Payback Time(years)
+            </th>
+            <th>
+                Interest Rate
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.loanType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payBackTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.interest)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("EditLoan", new { loanTypePara = item.loanType })" class="btn btn-primary"
+                        b-1ejoa07p39>Edit</a>
+                </td>
+
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-primary">Payment Plans</button>
+                        <div class="dropdown-content">
+                            <a href="@Url.Action("Paymentplan", new { loanTypePara = item.loanType })">Straight
+                                amortization </a>
+                            <a href="@Url.Action("Paymentplan2", new { loanTypePara = item.loanType })">Payment Plan 2</a>
+                            <a href="@Url.Action("Paymentplan3", new { loanTypePara = item.loanType })">Payment Plan 3</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
